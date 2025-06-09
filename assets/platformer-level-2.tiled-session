@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Space Background.tsx": {
+            "scaleInDock": 1
+        },
+        "platformer-level-1.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 401.33333333333337,
+                "y": 381.66666666666663
+            }
+        },
+        "platformer-level-1.tmx#kenny_tilemap_packed": {
+            "scaleInDock": 1
+        },
+        "platformer-level-1.tmx#monochrome_tilemap_packed": {
+            "scaleInDock": 1
+        },
+        "platformer-level-2.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 448,
+                "y": 302.5
+            }
+        },
+        "platformer-level-2.tmx#monochrome_tilemap_packed": {
+            "scaleInDock": 0.75
+        }
+    },
+    "last.exportedFilePath": "C:/Users/jimmy/OneDrive/Desktop/CMPM 120/Jimmy-Luu-Platformer/assets",
+    "last.imagePath": "C:/Users/jimmy/OneDrive/Desktop/CMPM 120/Jimmy-Luu-Platformer/assets",
+    "map.height": 25,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 150,
+    "openFiles": [
+    ],
+    "project": "platformer-level-2.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "platformer-level-1.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
