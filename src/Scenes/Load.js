@@ -10,6 +10,7 @@ class Load extends Phaser.Scene {
         this.load.atlas("platformer_characters", "tilemap-characters-packed.png", "tilemap-characters-packed.json");
         this.load.image("tilemap_cheet", "monochrome_tilemap_packed.png");
         this.load.tilemapTiledJSON("platformer-level-2", "platformer-level-2.tmj");
+        this.load.image('laser', 'assets/laser.png');
 
         this.load.spritesheet("tilemap_sheet", "monochrome_tilemap_packed.png", {
             frameWidth: 16,

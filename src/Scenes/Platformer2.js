@@ -264,32 +264,45 @@ class Platformer2 extends Phaser.Scene {
                 }
             } else {
                 my.sprite.player.setVelocityX(0);
-                my.sprite.player.anims.play('climb_idle', true);
             }
         } else {
             my.sprite.player.body.setAllowGravity(true);
 
             if (cursors.left.isDown) {
                 my.sprite.player.setAccelerationX(-this.ACCELERATION);
-                my.sprite.player.setFlip(false, false);
+                my.sprite.player.resetFlip();
                 my.sprite.player.anims.play('walk', true);
-                my.vfx.walking.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 30);
+                my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 10, my.sprite.player.displayHeight / 2 - 5, false);
+                my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
             } else if (cursors.right.isDown) {
                 my.sprite.player.setAccelerationX(this.ACCELERATION);
                 my.sprite.player.setFlip(true, false);
                 my.sprite.player.anims.play('walk', true);
-                my.vfx.walking.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 30);
+                my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 16, my.sprite.player.displayHeight / 2 - 5, false);
+                my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
             } else {
                 my.sprite.player.setAccelerationX(0);
                 my.sprite.player.setDragX(this.DRAG);
-                my.sprite.player.anims.play('idle', true);
+                my.sprite.player.anims.play('idle');
                 my.vfx.walking.stop();
             }
 
-            if (cursors.up.isDown && my.sprite.player.body.onFloor()) {
+            if (!my.sprite.player.body.blocked.down) {
+                my.sprite.player.anims.play('jump');
+            }
+
+            if (Phaser.Input.Keyboard.JustDown(cursors.up) && my.sprite.player.body.blocked.down) {
                 my.sprite.player.setVelocityY(this.JUMP_VELOCITY);
                 this.jumpSound.play();
-                my.vfx.jumping.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 25);
+
+                // Trigger jump particles
+                my.vfx.jumping.setParticleSpeed({ min: 50, max: 150 }, { min: -20, max: 20 });
+                my.vfx.jumping.emitParticleAt(
+                    my.sprite.player.x,
+                    my.sprite.player.y + my.sprite.player.displayHeight / 2
+                );
             }
         }
 

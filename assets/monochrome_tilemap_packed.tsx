@@ -23,7 +23,7 @@
  </tile>
  <tile id="60">
   <properties>
-   <property name="ladder" type="bool" value="false"/>
+   <property name="ladder" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="63">
@@ -53,7 +53,7 @@
  </tile>
  <tile id="80">
   <properties>
-   <property name="ladder" type="bool" value="false"/>
+   <property name="ladder" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="83">
@@ -93,7 +93,7 @@
  </tile>
  <tile id="100">
   <properties>
-   <property name="ladder" type="bool" value="false"/>
+   <property name="ladder" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="103">
@@ -133,7 +133,7 @@
  </tile>
  <tile id="120">
   <properties>
-   <property name="ladder" type="bool" value="false"/>
+   <property name="ladder" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="123">
