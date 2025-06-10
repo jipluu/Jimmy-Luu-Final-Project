@@ -86,7 +86,7 @@ class Platformer extends Phaser.Scene {
         });
         this.physics.add.overlap(my.sprite.player, this.doorGroup, () => {
             if (this.isGameOver) return;
-            this.scene.start('endGameScene');
+            this.scene.start('platformerScene2');  // Change to the next scene
         });
 
         // Controls
