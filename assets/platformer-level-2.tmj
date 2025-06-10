@@ -402,6 +402,54 @@
                  "width":16,
                  "x":2352,
                  "y":352
+                }, 
+                {
+                 "gid":324,
+                 "height":16,
+                 "id":22,
+                 "name":"enemy",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1648.5,
+                 "y":256.5
+                }, 
+                {
+                 "gid":324,
+                 "height":16,
+                 "id":23,
+                 "name":"enemy",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1104,
+                 "y":79.5
+                }, 
+                {
+                 "gid":324,
+                 "height":16,
+                 "id":24,
+                 "name":"enemy",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1505.5,
+                 "y":256
+                }, 
+                {
+                 "gid":324,
+                 "height":16,
+                 "id":25,
+                 "name":"enemy",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1824,
+                 "y":254.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -410,7 +458,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":22,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -825,6 +873,114 @@
                         }]
                 }, 
                 {
+                 "id":320,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":321,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":322,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":323,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":324,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":325,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":340,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":341,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":342,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":343,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":344,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":345,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":351,
                  "properties":[
                         {
@@ -906,6 +1062,60 @@
                         }]
                 }, 
                 {
+                 "id":360,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":361,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":362,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":363,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":364,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":365,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
                  "id":371,
                  "properties":[
                         {
@@ -982,6 +1192,60 @@
                  "properties":[
                         {
                          "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":380,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":381,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":382,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":383,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":384,
+                 "properties":[
+                        {
+                         "name":"enemy",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":385,
+                 "properties":[
+                        {
+                         "name":"enemy",
                          "type":"bool",
                          "value":true
                         }]

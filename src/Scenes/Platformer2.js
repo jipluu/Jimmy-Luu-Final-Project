@@ -87,6 +87,21 @@ class Platformer2 extends Phaser.Scene {
         this.platformLeftBound = 300;
         this.platformRightBound = 600;
 
+        this.enemyGroup = this.physics.add.group();
+        this.map.getObjectLayer("Objects").objects.forEach(obj => {
+            if (obj.name === "enemy") {
+                const enemy = this.enemyGroup.create(obj.x, obj.y - obj.height, "tilemap_sheet", 320);
+                enemy.setCollideWorldBounds(true);
+                enemy.setVelocityX(50);
+                enemy.setBounceX(1);
+                enemy.setImmovable(true);
+                enemy.body.setSize(enemy.width * 0.8, enemy.height);
+                enemy.setDepth(1);
+            }
+        });
+        this.physics.add.collider(this.enemyGroup, this.groundLayer);
+
+
         // Colliders & overlaps
         this.physics.add.collider(my.sprite.player, this.groundLayer);
         this.physics.add.collider(my.sprite.player, this.spikeLayer, () => this.playerDie(), null, this);
@@ -113,6 +128,10 @@ class Platformer2 extends Phaser.Scene {
             this.hasKey = true;
             this.objectiveText.setText("Key collected! Gate unlocked!");
             this.unlockGate(); // Immediately disable gate collision
+        });
+
+        this.physics.add.overlap(my.sprite.player, this.enemyGroup, () => {
+            if (!this.isGameOver) this.playerDie();
         });
 
         // Controls
@@ -280,6 +299,21 @@ class Platformer2 extends Phaser.Scene {
         } else if (this.movingPlatform.x <= this.platformLeftBound) {
             this.movingPlatform.setVelocityX(this.platformSpeed);
         }
+
+        this.enemyGroup.getChildren().forEach(enemy => {
+            const direction = enemy.body.velocity.x > 0 ? 1 : -1;
+
+            // Look slightly ahead and down
+            const offsetX = direction * enemy.width * 0.5;
+            const offsetY = enemy.height * 0.5 + 2;
+            const nextTile = this.groundLayer.getTileAtWorldXY(enemy.x + offsetX, enemy.y + offsetY, true);
+
+            if (!nextTile || !nextTile.collides) {
+                // No tile or non-collidable tile = turn around
+                enemy.setVelocityX(-enemy.body.velocity.x);
+                enemy.toggleFlipX();
+            }
+        });
     }
 
     playerDie() {

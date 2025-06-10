@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="150" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="22">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="150" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="28">
  <editorsettings>
   <export target="platformer-level-2.tmj" format="json"/>
  </editorsettings>
@@ -225,6 +225,66 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="320">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="321">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="322">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="323">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="324">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="325">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="340">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="341">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="342">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="343">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="344">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="345">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="351">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -270,6 +330,36 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="360">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="361">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="362">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="363">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="364">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="365">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
   <tile id="371">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -313,6 +403,36 @@
   <tile id="379">
    <properties>
     <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="380">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="381">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="382">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="383">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="384">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="385">
+   <properties>
+    <property name="enemy" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="391">
@@ -499,5 +619,9 @@
   <object id="19" name="Coins" gid="3" x="2067" y="263" width="16" height="16"/>
   <object id="20" name="Coins" gid="3" x="2145" y="262" width="16" height="16"/>
   <object id="21" name="Door" gid="57" x="2352" y="352" width="16" height="16"/>
+  <object id="22" name="enemy" gid="324" x="1648.5" y="256.5" width="16" height="16"/>
+  <object id="23" name="enemy" gid="324" x="1104" y="79.5" width="16" height="16"/>
+  <object id="24" name="enemy" gid="324" x="1505.5" y="256" width="16" height="16"/>
+  <object id="25" name="enemy" gid="324" x="1824" y="254.5" width="16" height="16"/>
  </objectgroup>
 </map>

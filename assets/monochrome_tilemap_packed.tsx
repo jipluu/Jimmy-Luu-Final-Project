@@ -221,6 +221,66 @@
    <property name="collides" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="320">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="321">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="322">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="323">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="324">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="325">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="340">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="341">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="342">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="343">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="344">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="345">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="351">
   <properties>
    <property name="collides" type="bool" value="true"/>
@@ -266,6 +326,36 @@
    <property name="collides" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="360">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="361">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="362">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="363">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="364">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="365">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="371">
   <properties>
    <property name="collides" type="bool" value="true"/>
@@ -309,6 +399,36 @@
  <tile id="379">
   <properties>
    <property name="collides" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="380">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="381">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="382">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="383">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="384">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="385">
+  <properties>
+   <property name="enemy" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="391">
