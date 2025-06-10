@@ -279,5 +279,3 @@ class Platformer extends Phaser.Scene {
         my.sprite.player.body.setAllowGravity(false);
     }
 }
-
-this.add.particles(x, y, textureKey, config);
