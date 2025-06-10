@@ -518,7 +518,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":36,
+ "nextobjectid":38,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -1391,6 +1391,19 @@
                          "value":true
                         }]
                 }],
+         "tilewidth":16
+        }, 
+        {
+         "columns":20,
+         "firstgid":401,
+         "image":"tilemap_packed2.png",
+         "imageheight":176,
+         "imagewidth":320,
+         "margin":0,
+         "name":"tilemap_packed2",
+         "spacing":0,
+         "tilecount":220,
+         "tileheight":16,
          "tilewidth":16
         }],
  "tilewidth":16,
