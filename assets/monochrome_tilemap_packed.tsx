@@ -21,6 +21,11 @@
    <property name="collides" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="60">
+  <properties>
+   <property name="ladder" type="bool" value="false"/>
+  </properties>
+ </tile>
  <tile id="63">
   <properties>
    <property name="collides" type="bool" value="true"/>
@@ -44,6 +49,11 @@
  <tile id="70">
   <properties>
    <property name="collides" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="80">
+  <properties>
+   <property name="ladder" type="bool" value="false"/>
   </properties>
  </tile>
  <tile id="83">
@@ -81,6 +91,11 @@
    <property name="collides" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="100">
+  <properties>
+   <property name="ladder" type="bool" value="false"/>
+  </properties>
+ </tile>
  <tile id="103">
   <properties>
    <property name="collides" type="bool" value="true"/>
@@ -116,6 +131,11 @@
    <property name="collides" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="120">
+  <properties>
+   <property name="ladder" type="bool" value="false"/>
+  </properties>
+ </tile>
  <tile id="123">
   <properties>
    <property name="collides" type="bool" value="true"/>
@@ -149,6 +169,11 @@
  <tile id="129">
   <properties>
    <property name="collides" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="183">
+  <properties>
+   <property name="spike" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="227">

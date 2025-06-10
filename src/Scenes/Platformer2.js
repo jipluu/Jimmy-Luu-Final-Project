@@ -18,14 +18,17 @@ class Platformer2 extends Phaser.Scene {
         this.coinsCollected = 0;
         this.isGameOver = false;
         this.hasKey = false;
+
+        this.platformSpeed = 50; // speed of moving platform
     }
 
     create() {
-        // Tilemap and layers
+        // Tilemap & Tilesets
         this.map = this.add.tilemap("platformer-level-2", 16, 16, 150, 25);
         this.tileset1 = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap_sheet");
         this.tileset2 = this.map.addTilesetImage("Space Background", "tilemap_tiles");
 
+        // Layers
         this.backgroundLayer = this.map.createLayer("Background", [this.tileset1, this.tileset2], 0, 0);
         this.groundLayer = this.map.createLayer("Ground-n-Platforms", [this.tileset1, this.tileset2], 0, 0);
         this.ladderLayer = this.map.createLayer("ladder", [this.tileset1, this.tileset2], 0, 0);
@@ -46,21 +49,27 @@ class Platformer2 extends Phaser.Scene {
 
         // Coins
         this.coins = this.map.createFromObjects("Objects", {
-            name: "Coins", key: "tilemap_sheet", frame: 2
+            name: "Coins",
+            key: "tilemap_sheet",
+            frame: 2
         });
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
         this.coinGroup = this.add.group(this.coins);
 
         // Doors
         this.doors = this.map.createFromObjects("Objects", {
-            name: "Door", key: "tilemap_sheet", frame: 56
+            name: "Door",
+            key: "tilemap_sheet",
+            frame: 56
         });
         this.physics.world.enable(this.doors, Phaser.Physics.Arcade.STATIC_BODY);
         this.doorGroup = this.add.group(this.doors);
 
         // Keys
         this.keys = this.map.createFromObjects("Objects", {
-            name: "key", key: "tilemap_sheet", frame: 96
+            name: "key",
+            key: "tilemap_sheet",
+            frame: 96
         });
         this.physics.world.enable(this.keys, Phaser.Physics.Arcade.STATIC_BODY);
         this.keyGroup = this.add.group(this.keys);
@@ -69,10 +78,21 @@ class Platformer2 extends Phaser.Scene {
         my.sprite.player = this.physics.add.sprite(30, 210, "platformer_characters", "tile_0000.png").setScale(0.8);
         my.sprite.player.setCollideWorldBounds(true);
 
-        // Colliders
+        // Moving platform
+        this.movingPlatform = this.physics.add.sprite(200, 310, "tilemap_sheet", 123);
+        this.movingPlatform.setImmovable(true);
+        this.movingPlatform.body.allowGravity = false;
+        this.movingPlatform.setVelocityX(this.platformSpeed);
+
+        this.platformLeftBound = 300;
+        this.platformRightBound = 600;
+
+        // Colliders & overlaps
         this.physics.add.collider(my.sprite.player, this.groundLayer);
         this.physics.add.collider(my.sprite.player, this.spikeLayer, () => this.playerDie(), null, this);
         this.physics.add.collider(my.sprite.player, this.gateLayer);
+
+        this.physics.add.collider(my.sprite.player, this.movingPlatform);
 
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (player, coin) => {
             if (this.isGameOver) return;
@@ -99,7 +119,7 @@ class Platformer2 extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         this.rKey = this.input.keyboard.addKey('R');
 
-        // Debug
+        // Debug toggle
         this.input.keyboard.on('keydown-D', () => {
             this.physics.world.drawDebug = !this.physics.world.drawDebug;
             this.physics.world.debugGraphic.clear();
@@ -110,8 +130,9 @@ class Platformer2 extends Phaser.Scene {
             frame: ['dirt_02.png', 'dirt_01.png'],
             scale: { start: 0.03, end: 0.1 },
             lifespan: 350,
-            alpha: { start: 0.1, end: 0.1 }
-        }).stop();
+            alpha: { start: 0.1, end: 0.1 },
+        });
+        my.vfx.walking.stop();
 
         my.vfx.jumping = this.add.particles(0, 0, "kenny-particles", {
             frame: ['muzzle_01.png', 'muzzle_04.png'],
@@ -121,37 +142,54 @@ class Platformer2 extends Phaser.Scene {
             angle: { min: 240, max: 300 },
             speed: { min: 50, max: 150 },
             quantity: 5
-        }).stop();
+        });
+        my.vfx.jumping.stop();
 
-        // Camera & UI
-        const zoom = 3.5;
+        // Camera & UI setup
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.setDeadzone(50, 50);
-        this.cameras.main.setZoom(zoom);
         this.cameras.main.startFollow(my.sprite.player);
+        const zoom = 3.5;
+        this.cameras.main.setZoom(zoom);
 
         const gameWidth = this.sys.game.config.width;
         const gameHeight = this.sys.game.config.height;
 
-        this.objectiveText = this.add.text(gameWidth / 2 / zoom, 10 / zoom, "Escape this Black and White Planet", {
-            fontSize: (24 / zoom) + 'px',
-            fill: '#ffffff',
-            fontFamily: 'Arial',
-            fontStyle: 'bold',
-        }).setOrigin(0.5, 0).setScrollFactor(0);
+        this.objectiveText = this.add.text(
+            gameWidth / 2 / zoom,
+            10 / zoom,
+            "Escape this Black and White Planet",
+            {
+                fontSize: (24 / zoom) + 'px',
+                fill: '#ffffff',
+                fontFamily: 'Arial',
+                fontStyle: 'bold',
+            }
+        ).setOrigin(0.5, 0).setScrollFactor(0);
 
-        this.scoreText = this.add.text(16 / zoom, 16 / zoom, 'Score: 0', {
-            fontSize: (20 / zoom) + 'px',
-            fill: '#ffffff',
-            fontFamily: 'Arial'
-        }).setScrollFactor(0);
+        this.scoreText = this.add.text(
+            16 / zoom,
+            16 / zoom,
+            'Score: 0',
+            {
+                fontSize: (20 / zoom) + 'px',
+                fill: '#ffffff',
+                fontFamily: 'Arial'
+            }
+        ).setScrollFactor(0);
 
-        this.gameOverText = this.add.text(gameWidth / 2, gameHeight / 2, 'Game Over\nPress R to Restart', {
-            fontSize: '40px',
-            fill: '#ff0000',
-            fontFamily: 'Arial',
-            align: 'center'
-        }).setOrigin(0.5).setScrollFactor(0).setVisible(false);
+        this.gameOverText = this.add.text(
+            gameWidth / 2,
+            gameHeight / 2,
+            'Game Over\nPress R to Restart',
+            {
+                fontSize: '40px',
+                fill: '#ff0000',
+                fontFamily: 'Arial',
+                align: 'center'
+            }
+        ).setOrigin(0.5).setScrollFactor(0);
+        this.gameOverText.setVisible(false);
     }
 
     update() {
@@ -162,15 +200,20 @@ class Platformer2 extends Phaser.Scene {
             return;
         }
 
-        // Ladder handling (same as before)
-        let playerTile = this.map.getTileAtWorldXY(my.sprite.player.x, my.sprite.player.y, true, this.cameras.main, this.ladderLayer);
+        let playerTile = this.map.getTileAtWorldXY(
+            my.sprite.player.x,
+            my.sprite.player.y,
+            true,
+            this.cameras.main,
+            this.ladderLayer
+        );
         this.onLadder = playerTile?.properties?.ladder || false;
 
-        // Climbing logic
         if (this.onLadder) {
             my.sprite.player.body.setAllowGravity(false);
             my.sprite.player.setAccelerationX(0);
             my.sprite.player.setDragX(this.DRAG);
+
             if (cursors.up.isDown) {
                 my.sprite.player.setVelocityY(-this.VELOCITY_CLIMB);
                 my.sprite.player.anims.play('climb', true);
@@ -181,41 +224,70 @@ class Platformer2 extends Phaser.Scene {
                 my.sprite.player.setVelocityY(this.CLIMB_IDLE_DROP_SPEED);
                 my.sprite.player.anims.play('climb_idle', true);
             }
-            if (cursors.left.isDown || cursors.right.isDown) {
-                const moveX = cursors.left.isDown ? -this.VELOCITY : this.VELOCITY;
-                my.sprite.player.setVelocityX(moveX);
-                my.sprite.player.setFlip(cursors.right.isDown, false);
+
+            if (cursors.left.isDown) {
+                my.sprite.player.setVelocityX(-this.VELOCITY);
+                my.sprite.player.resetFlip();
                 my.sprite.player.anims.play('walk', true);
+                let nextTile = this.map.getTileAtWorldXY(my.sprite.player.x - 2, my.sprite.player.y, true, this.cameras.main, this.ladderLayer);
+                if (!nextTile?.properties?.ladder) {
+                    this.onLadder = false;
+                    my.sprite.player.body.setAllowGravity(true);
+                }
+            } else if (cursors.right.isDown) {
+                my.sprite.player.setVelocityX(this.VELOCITY);
+                my.sprite.player.setFlip(true, false);
+                my.sprite.player.anims.play('walk', true);
+                let nextTile = this.map.getTileAtWorldXY(my.sprite.player.x + 2, my.sprite.player.y, true, this.cameras.main, this.ladderLayer);
+                if (!nextTile?.properties?.ladder) {
+                    this.onLadder = false;
+                    my.sprite.player.body.setAllowGravity(true);
+                }
             } else {
                 my.sprite.player.setVelocityX(0);
+                my.sprite.player.anims.play('climb_idle', true);
             }
         } else {
             my.sprite.player.body.setAllowGravity(true);
+
             if (cursors.left.isDown) {
                 my.sprite.player.setAccelerationX(-this.ACCELERATION);
-                my.sprite.player.resetFlip();
+                my.sprite.player.setFlip(false, false);
                 my.sprite.player.anims.play('walk', true);
-                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
+                my.vfx.walking.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 30);
             } else if (cursors.right.isDown) {
                 my.sprite.player.setAccelerationX(this.ACCELERATION);
                 my.sprite.player.setFlip(true, false);
                 my.sprite.player.anims.play('walk', true);
-                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
+                my.vfx.walking.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 30);
             } else {
                 my.sprite.player.setAccelerationX(0);
                 my.sprite.player.setDragX(this.DRAG);
-                my.sprite.player.anims.play('idle');
+                my.sprite.player.anims.play('idle', true);
                 my.vfx.walking.stop();
             }
-            if (!my.sprite.player.body.blocked.down) {
-                my.sprite.player.anims.play('jump');
-            }
-            if (Phaser.Input.Keyboard.JustDown(cursors.up) && my.sprite.player.body.blocked.down) {
+
+            if (cursors.up.isDown && my.sprite.player.body.onFloor()) {
                 my.sprite.player.setVelocityY(this.JUMP_VELOCITY);
                 this.jumpSound.play();
-                my.vfx.jumping.emitParticleAt(my.sprite.player.x, my.sprite.player.y + my.sprite.player.displayHeight / 2);
+                my.vfx.jumping.emitParticleAt(my.sprite.player.x, my.sprite.player.y + 25);
             }
         }
+
+        // Moving platform logic
+        if (this.movingPlatform.x >= this.platformRightBound) {
+            this.movingPlatform.setVelocityX(-this.platformSpeed);
+        } else if (this.movingPlatform.x <= this.platformLeftBound) {
+            this.movingPlatform.setVelocityX(this.platformSpeed);
+        }
+    }
+
+    playerDie() {
+        this.isGameOver = true;
+        this.gameOverText.setVisible(true);
+        my.sprite.player.setTint(0xff0000);
+        my.sprite.player.setVelocity(0, 0);
+        my.sprite.player.anims.stop();
     }
 
     unlockGate() {
@@ -224,15 +296,6 @@ class Platformer2 extends Phaser.Scene {
             tile.setCollision(false);
         });
     }
-
-    playerDie() {
-        this.isGameOver = true;
-        this.gameOverText.setVisible(true);
-        my.vfx.walking.stop();
-        this.bgm.stop();
-        my.sprite.player.setTint(0xff0000);
-        my.sprite.player.setVelocity(0, 0);
-        my.sprite.player.body.setAllowGravity(false);
-    }
 }
+
 
