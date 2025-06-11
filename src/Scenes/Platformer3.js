@@ -40,8 +40,6 @@ class Platformer3 extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
         // Sounds
-        this.bgm = this.sound.add("bgm", { loop: true, volume: 0.2 });
-        this.bgm.play();
         this.jumpSound = this.sound.add("jumpSound", { volume: 0.3 });
         this.coinSound = this.sound.add("coinSound", { volume: 0.2 });
         this.walkSound = this.sound.add("footstep2", { volume: 0.3 });
