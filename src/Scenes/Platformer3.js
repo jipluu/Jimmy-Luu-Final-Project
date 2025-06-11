@@ -312,7 +312,6 @@ class Platformer3 extends Phaser.Scene {
         if (this.isGameOver) return; // Prevent multiple triggers
 
         this.isGameOver = true;
-        this.bgm.stop();
 
         // Stop dieSound if playing, then play once
         if (this.dieSound.isPlaying) {

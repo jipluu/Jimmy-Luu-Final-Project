@@ -16,7 +16,7 @@ class Credits extends Phaser.Scene {
 
         // Credits content
         this.add.text(this.cameras.main.width / 2, 200, 
-            "\n\nGame Design: Jimmy Luu\n\nProgramming: Jimmy Luu\n\nAssets: Kenny Assets\n\nMusic: Goose Ninja\n\n SFX: jsfxr and iGottic", {
+            "\n\n\n\nGame Design: Jimmy Luu\n\nProgramming: Jimmy Luu\n\nAssets: Kenny Assets\n\nMusic: Goose Ninja\n\n SFX: jsfxr and iGottic", {
                 fontSize: '24px',
                 fill: '#ffffff',
                 fontFamily: 'Arial',

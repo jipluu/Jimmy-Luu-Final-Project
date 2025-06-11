@@ -9,7 +9,7 @@ class EndGame extends Phaser.Scene {
         this.add.text(
             this.cameras.main.width / 2,
             this.cameras.main.height / 2 - 70,
-            'You reached the door!\nGame Over',
+            'Tou have escaped the black and white alien planet!',
             {
                 fontSize: '48px',
                 fill: '#ffffff',
