@@ -59,7 +59,7 @@ class Load extends Phaser.Scene {
             
         });
 
-        this.scene.start("platformerScene2");
+        this.scene.start("platformerScene");
     }
 }
 
