@@ -41,11 +41,15 @@ class Platformer2 extends Phaser.Scene {
 
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
+
         // Sounds
-        this.bgm = this.sound.add("bgm", { loop: true, volume: 0.2 });
-        this.bgm.play();
         this.jumpSound = this.sound.add("jumpSound", { volume: 0.3 });
         this.coinSound = this.sound.add("coinSound", { volume: 0.2 });
+        this.walkSound = this.sound.add("footstep2", { volume: 0.3 });
+        this.dieSound = this.sound.add("explosion", { volume: 0.5, loop: false });
+
+        this.lastStepTime = 0;
+        this.stepInterval = 300;
 
         // Coins
         this.coins = this.map.createFromObjects("Objects", {
@@ -119,7 +123,7 @@ class Platformer2 extends Phaser.Scene {
 
         this.physics.add.overlap(my.sprite.player, this.doorGroup, () => {
             if (this.isGameOver) return;
-            this.scene.start('endGameScene');
+            this.scene.start('platformerScene3'); // Transition to next level
         });
 
         this.physics.add.overlap(my.sprite.player, this.keyGroup, (player, key) => {
@@ -275,6 +279,9 @@ class Platformer2 extends Phaser.Scene {
                 my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 10, my.sprite.player.displayHeight / 2 - 5, false);
                 my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
                 if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
+
+                // Play footstep sound if not already playing
+                if (!this.walkSound.isPlaying) this.walkSound.play();
             } else if (cursors.right.isDown) {
                 my.sprite.player.setAccelerationX(this.ACCELERATION);
                 my.sprite.player.setFlip(true, false);
@@ -282,17 +289,25 @@ class Platformer2 extends Phaser.Scene {
                 my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 16, my.sprite.player.displayHeight / 2 - 5, false);
                 my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
                 if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
+
+                // Play footstep sound if not already playing
+                if (!this.walkSound.isPlaying) this.walkSound.play();
             } else {
                 my.sprite.player.setAccelerationX(0);
                 my.sprite.player.setDragX(this.DRAG);
                 my.sprite.player.anims.play('idle');
                 my.vfx.walking.stop();
+
+                // Stop footstep sound when not walking
+                if (this.walkSound.isPlaying) this.walkSound.stop();
             }
 
+            // Stop footstep sound when in air
             if (!my.sprite.player.body.blocked.down) {
-                my.sprite.player.anims.play('jump');
+                if (this.walkSound.isPlaying) this.walkSound.stop();
             }
 
+            // Jumping logic
             if (Phaser.Input.Keyboard.JustDown(cursors.up) && my.sprite.player.body.blocked.down) {
                 my.sprite.player.setVelocityY(this.JUMP_VELOCITY);
                 this.jumpSound.play();
@@ -330,19 +345,36 @@ class Platformer2 extends Phaser.Scene {
     }
 
     playerDie() {
+        if (this.isGameOver) return; // Prevent multiple triggers
+
         this.isGameOver = true;
-        this.gameOverText.setVisible(true);
+        this.bgm.stop();
+
+        // Stop dieSound if playing, then play once
+        if (this.dieSound.isPlaying) {
+            this.dieSound.stop();
+        }
+        this.dieSound.play();
+
+        // When dieSound ends, explicitly stop it to be safe
+        this.dieSound.once('complete', () => {
+            this.dieSound.stop();
+        });
+
         my.sprite.player.setTint(0xff0000);
         my.sprite.player.setVelocity(0, 0);
         my.sprite.player.anims.stop();
+
+        this.gameOverText.setVisible(true);
     }
 
     unlockGate() {
         this.gateLayer.setCollisionByProperty({ collides: false });
         this.gateLayer.forEachTile(tile => {
-            tile.setCollision(false);
+            if (tile.properties.collides) {
+                tile.setCollision(false);
+            }
         });
     }
 }
-
 

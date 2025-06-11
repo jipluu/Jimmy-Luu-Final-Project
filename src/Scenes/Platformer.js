@@ -27,7 +27,7 @@ class Platformer extends Phaser.Scene {
 
     create() {
         // Tilemap & Tileset
-        this.map = this.add.tilemap("platformer-level-3", 16, 16, 150, 25);
+        this.map = this.add.tilemap("platformer-level-1", 16, 16, 150, 25);
         this.tileset1 = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap_sheet");
         this.tileset2 = this.map.addTilesetImage("Space Background", "tilemap_tiles");
 
@@ -48,9 +48,13 @@ class Platformer extends Phaser.Scene {
         this.bgm.play();
 
         this.jumpSound = this.sound.add("jumpSound", { volume: 0.3 });
-
-
         this.coinSound = this.sound.add("coinSound", { volume: 0.2 });
+
+        this.walkSound = this.sound.add("footstep2", { volume: 0.3 });
+        this.dieSound = this.sound.add("explosion", { volume: 0.5, loop: false });
+
+        this.lastStepTime = 0;
+        this.stepInterval = 300;
 
         // Add coins from objects layer
         this.coins = this.map.createFromObjects("Objects", {
@@ -229,53 +233,102 @@ class Platformer extends Phaser.Scene {
             }
         } else {
             my.sprite.player.body.setAllowGravity(true);
+            my.sprite.player.setAccelerationX(0);
+            my.sprite.player.setDragX(this.DRAG);
 
-            if (cursors.left.isDown) {
-                my.sprite.player.setAccelerationX(-this.ACCELERATION);
-                my.sprite.player.resetFlip();
-                my.sprite.player.anims.play('walk', true);
-                my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 10, my.sprite.player.displayHeight / 2 - 5, false);
-                my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
-                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
-            } else if (cursors.right.isDown) {
-                my.sprite.player.setAccelerationX(this.ACCELERATION);
-                my.sprite.player.setFlip(true, false);
-                my.sprite.player.anims.play('walk', true);
-                my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 16, my.sprite.player.displayHeight / 2 - 5, false);
-                my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
-                if (my.sprite.player.body.blocked.down) my.vfx.walking.start();
-            } else {
-                my.sprite.player.setAccelerationX(0);
-                my.sprite.player.setDragX(this.DRAG);
-                my.sprite.player.anims.play('idle');
-                my.vfx.walking.stop();
-            }
-
-            if (!my.sprite.player.body.blocked.down) {
-                my.sprite.player.anims.play('jump');
-            }
-
-            if (Phaser.Input.Keyboard.JustDown(cursors.up) && my.sprite.player.body.blocked.down) {
-                my.sprite.player.setVelocityY(this.JUMP_VELOCITY);
-                this.jumpSound.play();
-
-                // Trigger jump particles
-                my.vfx.jumping.setParticleSpeed({ min: 50, max: 150 }, { min: -20, max: 20 });
-                my.vfx.jumping.emitParticleAt(
-                    my.sprite.player.x,
-                    my.sprite.player.y + my.sprite.player.displayHeight / 2
-                );
-            }
+            this.handleGroundMovement();
         }
     }
 
+    handleGroundMovement() {
+        if (cursors.left.isDown) {
+            my.sprite.player.setAccelerationX(-this.ACCELERATION);
+            my.sprite.player.resetFlip();
+            my.sprite.player.anims.play('walk', true);
+            my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 10, my.sprite.player.displayHeight / 2 - 5, false);
+            my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+
+            if (my.sprite.player.body.blocked.down) {
+                my.vfx.walking.start();
+                if (this.time.now - this.lastStepTime > this.stepInterval) {
+                    this.walkSound.play();
+                    this.lastStepTime = this.time.now;
+                }
+            } else {
+                my.vfx.walking.stop();
+            }
+        } else if (cursors.right.isDown) {
+            my.sprite.player.setAccelerationX(this.ACCELERATION);
+            my.sprite.player.setFlip(true, false);
+            my.sprite.player.anims.play('walk', true);
+            my.vfx.walking.startFollow(my.sprite.player, my.sprite.player.displayWidth / 2 - 16, my.sprite.player.displayHeight / 2 - 5, false);
+            my.vfx.walking.setParticleSpeed(this.PARTICLE_VELOCITY, 0);
+
+            if (my.sprite.player.body.blocked.down) {
+                my.vfx.walking.start();
+                if (this.time.now - this.lastStepTime > this.stepInterval) {
+                    this.walkSound.play();
+                    this.lastStepTime = this.time.now;
+                }
+            } else {
+                my.vfx.walking.stop();
+            }
+        } else {
+            my.sprite.player.setAccelerationX(0);
+            my.sprite.player.setDragX(this.DRAG);
+            my.sprite.player.anims.play('idle');
+            my.vfx.walking.stop();
+        }
+
+        if (!my.sprite.player.body.blocked.down) {
+            my.sprite.player.anims.play('jump');
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(cursors.up) && my.sprite.player.body.blocked.down) {
+            my.sprite.player.setVelocityY(this.JUMP_VELOCITY);
+            this.jumpSound.play();
+            my.vfx.jumping.setParticleSpeed({ min: 50, max: 150 }, { min: -20, max: 20 });
+            my.vfx.jumping.emitParticleAt(my.sprite.player.x, my.sprite.player.y + my.sprite.player.displayHeight / 2);
+            my.vfx.walking.stop();
+        }
+    }
+
+    handleLadderMovement() {
+        my.sprite.player.body.setAllowGravity(false);
+        my.sprite.player.setVelocityY(0);
+        my.sprite.player.setAccelerationX(0);
+        my.sprite.player.anims.play('climb', true);
+
+        if (cursors.up.isDown) my.sprite.player.setVelocityY(-this.VELOCITY_CLIMB);
+        if (cursors.down.isDown) my.sprite.player.setVelocityY(this.VELOCITY_CLIMB);
+
+        if (my.sprite.player.body.velocity.y > this.CLIMB_IDLE_DROP_SPEED) {
+            my.sprite.player.anims.play('idle');
+        }
+    }
+
+
     playerDie() {
+        if (this.isGameOver) return; // Prevent multiple triggers
+
         this.isGameOver = true;
-        this.gameOverText.setVisible(true);
-        my.vfx.walking.stop();
         this.bgm.stop();
+
+        // Stop dieSound if playing, then play once
+        if (this.dieSound.isPlaying) {
+            this.dieSound.stop();
+        }
+        this.dieSound.play();
+
+        // When dieSound ends, explicitly stop it to be safe
+        this.dieSound.once('complete', () => {
+            this.dieSound.stop();
+        });
+
         my.sprite.player.setTint(0xff0000);
         my.sprite.player.setVelocity(0, 0);
-        my.sprite.player.body.setAllowGravity(false);
+        my.sprite.player.anims.stop();
+
+        this.gameOverText.setVisible(true);
     }
 }

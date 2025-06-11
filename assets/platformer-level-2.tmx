@@ -177,7 +177,7 @@
   </tile>
   <tile id="183">
    <properties>
-    <property name="spike" type="bool" value="true"/>
+    <property name="spike" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="227">

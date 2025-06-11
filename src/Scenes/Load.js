@@ -27,6 +27,8 @@ class Load extends Phaser.Scene {
         this.load.audio("coinSound", "pickupCoin.wav");
         this.load.audio('bgm', 'slow-travel.wav');
         this.load.audio("jumpSound", "jump.wav");
+        this.load.audio("footstep2", "footstep2.wav");
+        this.load.audio("explosion", "explosion.wav");
     }
 
     create() {
@@ -57,7 +59,7 @@ class Load extends Phaser.Scene {
             
         });
 
-        this.scene.start("platformerScene3");
+        this.scene.start("platformerScene2");
     }
 }
 
