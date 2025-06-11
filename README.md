@@ -11,7 +11,7 @@ Visual assets courtesy of [Kenny Assets](https://kenney.nl/assets/1-bit-platform
 
 Visual assets courtesy of [Kenny Assets](https://kenney.nl/assets/pixel-platformer), with gratitude.
 
-Audio for the coin collection and jump was made by me using [jsfxr](https://sfxr.me/)
+Audio for the coin collection, jump, and explosion was made by me using [jsfxr](https://sfxr.me/)
 
 Visual assets particles courtesy of [Kenny Assets](https://kenney.nl/assets/particle-pack), with gratitude.
 
