@@ -102,6 +102,7 @@ class Platformer3 extends Phaser.Scene {
 
         this.physics.add.overlap(my.sprite.player, this.keyGroup, (player, key) => {
             if (this.isGameOver) return;
+            this.coinSound.play();
             key.destroy();
             this.hasKey = true;
             this.objectiveText.setText("Key collected! Gate unlocked!");
