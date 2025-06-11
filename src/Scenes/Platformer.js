@@ -27,7 +27,7 @@ class Platformer extends Phaser.Scene {
 
     create() {
         // Tilemap & Tileset
-        this.map = this.add.tilemap("platformer-level-1", 16, 16, 150, 25);
+        this.map = this.add.tilemap("platformer-level-3", 16, 16, 150, 25);
         this.tileset1 = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap_sheet");
         this.tileset2 = this.map.addTilesetImage("Space Background", "tilemap_tiles");
 

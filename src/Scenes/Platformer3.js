@@ -1,6 +1,6 @@
-class Platformer2 extends Phaser.Scene {
+class Platformer3 extends Phaser.Scene {
     constructor() {
-        super("platformerScene2");
+        super("platformerScene3");
     }
 
     init() {
@@ -24,7 +24,7 @@ class Platformer2 extends Phaser.Scene {
 
     create() {
         // Tilemap & Tilesets
-        this.map = this.add.tilemap("platformer-level-2", 16, 16, 150, 25);
+        this.map = this.add.tilemap("platformer-level-3", 16, 16, 150, 25);
         this.tileset1 = this.map.addTilesetImage("monochrome_tilemap_packed", "tilemap_sheet");
         this.tileset2 = this.map.addTilesetImage("Space Background", "tilemap_tiles");
 
@@ -78,14 +78,6 @@ class Platformer2 extends Phaser.Scene {
         my.sprite.player = this.physics.add.sprite(30, 210, "platformer_characters", "tile_0000.png").setScale(0.8);
         my.sprite.player.setCollideWorldBounds(true);
 
-        // Moving platform
-        this.movingPlatform = this.physics.add.sprite(200, 310, "tilemap_sheet", 123);
-        this.movingPlatform.setImmovable(true);
-        this.movingPlatform.body.allowGravity = false;
-        this.movingPlatform.setVelocityX(this.platformSpeed);
-
-        this.platformLeftBound = 300;
-        this.platformRightBound = 600;
 
         this.enemyGroup = this.physics.add.group();
         this.map.getObjectLayer("Objects").objects.forEach(obj => {
@@ -306,12 +298,6 @@ class Platformer2 extends Phaser.Scene {
             }
         }
 
-        // Moving platform logic
-        if (this.movingPlatform.x >= this.platformRightBound) {
-            this.movingPlatform.setVelocityX(-this.platformSpeed);
-        } else if (this.movingPlatform.x <= this.platformLeftBound) {
-            this.movingPlatform.setVelocityX(this.platformSpeed);
-        }
 
         this.enemyGroup.getChildren().forEach(enemy => {
             const direction = enemy.body.velocity.x > 0 ? 1 : -1;

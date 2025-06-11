@@ -11,6 +11,7 @@ class Load extends Phaser.Scene {
         this.load.image("tilemap_cheet", "monochrome_tilemap_packed.png");
         this.load.tilemapTiledJSON("platformer-level-1", "platformer-level-1.tmj");
         this.load.tilemapTiledJSON("platformer-level-2", "platformer-level-2.tmj");
+        this.load.tilemapTiledJSON("platformer-level-3", "platformer-level-3.tmj");
 
         this.load.image('laser', 'assets/laser.png');
 
@@ -56,7 +57,7 @@ class Load extends Phaser.Scene {
             
         });
 
-        this.scene.start("platformerScene");
+        this.scene.start("platformerScene3");
     }
 }
 
