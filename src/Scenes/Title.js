@@ -9,7 +9,7 @@ class Title extends Phaser.Scene {
             "Alien Planet Escape", {
                 fontSize: '48px',
                 fill: '#ffffff',
-                fontFamily: 'PressStart2P',
+                fontFamily: 'Arial',
                 stroke: '#000000',
                 strokeThickness: 8
             }).setOrigin(0.5);
@@ -19,7 +19,7 @@ class Title extends Phaser.Scene {
             "Press P to Play", {
                 fontSize: '24px',
                 fill: '#ffffff',
-                fontFamily: 'PressStart2P'
+                fontFamily: 'Arial'
             }).setOrigin(0.5);
 
         // Credits instruction
@@ -27,7 +27,7 @@ class Title extends Phaser.Scene {
             "Press C for Credits", {
                 fontSize: '20px',
                 fill: '#ffffff',
-                fontFamily: 'PressStart2P'
+                fontFamily: 'Arial'
             }).setOrigin(0.5);
 
         // Controls instructions
@@ -35,7 +35,7 @@ class Title extends Phaser.Scene {
             "Use Arrow Keys to Move", {
                 fontSize: '20px',
                 fill: '#ffffff',
-                fontFamily: 'PressStart2P'
+                fontFamily: 'Arial'
             }).setOrigin(0.5);
 
         // Setup keys
